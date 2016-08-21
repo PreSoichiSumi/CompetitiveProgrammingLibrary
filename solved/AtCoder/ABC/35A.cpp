@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <climits>
 #include <array>
 #include <cmath>
@@ -9,19 +9,26 @@ using namespace std;
 #define MODULE 1000000007
 #define MP make_pair
 
+
 typedef pair<int, int> P;
 typedef long long LL;
-const int INF = INT_MAX / 2;
 const int MAXWH = 1000;
 
-int dx[4] = {-1, 0, 1, 0};
-int dy[4] = {0, -1, 0, 1};
+int dx[4] = { -1, 0, 1, 0 };
+int dy[4] = { 0, -1, 0, 1 };
 
 //-----Template---------
-
+int w, h;
 int main()
 {
-	cout << "Hello World!\n";
-	cout << "A" << endl;
+	std::cin >> w>>h;
+	int sho = w / 4;
+	if(h/sho==3)
+	{
+		std::cout << "4:3" << endl;;
+	}else
+	{
+		std::cout << "16:9" << endl;
+	}
 	return 0;
 }
