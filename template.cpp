@@ -12,7 +12,7 @@ using namespace std;
 typedef pair<int, int> P;
 typedef long long LL;
 const int INF = INT_MAX / 2;
-const int MAXWH = 1000;
+const int MAXN = 1000;
 
 int dx[4] = {-1, 0, 1, 0};
 int dy[4] = {0, -1, 0, 1};
