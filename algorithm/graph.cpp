@@ -42,7 +42,7 @@ public:
 //---Bellman-Ford--O(VE)--------------
 #define MAXE 10001
 #define MAXV 10001
-struct edge{int from,to,cost};
+struct edge{int from,to,cost;};
 edge es[MAXE];
 int d[MAXV];
 int V,E;
