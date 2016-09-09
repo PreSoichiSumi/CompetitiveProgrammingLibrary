@@ -16,8 +16,13 @@ uint64_t goodComb(uint64_t n, uint64_t k) { //結果がuint64内ならオーバ�
     }
     return r;
 }
-//------------------
-vector<LL> getPrimesEratos(LL n){ //エラトステネスの篩　n以下の素数を列挙
+//--Euclid--
+int gcd(int a,int b){
+    if(b==0)return a;
+    return gcd(b,a%b);
+}
+//---エラトステネスのふるい  n以下の素数を列挙---------------
+vector<LL> getPrimesEratos(LL n){ 
     LL rootN= static_cast<long>(sqrt(n));
     bool prime[n+1];
     fill(prime,prime+n+1,true);
