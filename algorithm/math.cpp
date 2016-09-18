@@ -119,3 +119,15 @@ struct UnionFind {
     }
 };
 //--------------
+
+//--lower_bound------
+int lb=-1,ub=n;//lbを条件を満たさない値に，ubを条件を満たす値に初期化し，解の存在範囲が十分小さくなるまで繰り返す
+while(ub-lb>1){
+    int mid=(lb+ub)/2;
+    if(a[mid]>=k){
+        ub=mid;
+    }else{
+        lb=mid;
+    }
+}
+//-----------------
