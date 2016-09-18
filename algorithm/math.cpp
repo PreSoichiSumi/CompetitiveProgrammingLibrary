@@ -1,4 +1,4 @@
-uint64_t basicFact(uint64_t n) {
+﻿uint64_t basicFact(uint64_t n) {
     if (n > 1)
         return n * fac(n-1);
     else
@@ -21,6 +21,13 @@ int gcd(int a,int b){
     if(b==0)return a;
     return gcd(b,a%b);
 }
+//---試し割り素数判定 O(√n)
+bool isPrime(int n){
+    for (int i = 2; i*i<=n; ++i) {
+        if(n%i==0)return false;
+    }
+    return n!=1;
+}
 //---エラトステネスのふるい  n以下の素数を列挙---------------
 vector<LL> getPrimesEratos(LL n){ 
     LL rootN= static_cast<long>(sqrt(n));
@@ -37,6 +44,16 @@ vector<LL> getPrimesEratos(LL n){
     for(LL i=0;i<=n;i++){
         if(prime[i])
             res.push_back(i);
+    }
+    return res;
+}
+//------繰り返し二乗法
+LL fastPow(LL x,LL n){ // O(logN)
+    LL res=1;
+    while(n>0){
+        if(n&1)res=res*x;
+        x=x*x;
+        n>>=1;
     }
     return res;
 }
