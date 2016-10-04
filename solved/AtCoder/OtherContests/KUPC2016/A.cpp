@@ -1,4 +1,4 @@
-﻿#include <bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -13,7 +13,7 @@ typedef long long LL;
 const int INF = INT_MAX / 2;    //int_max->2*e+9
 const int MAXN = 100001;
 
-/*struct edge {   
+/*struct edge {
     edge(int to, int cost) : to(to), cost(cost) {}
     int to, cost;
 };
@@ -24,8 +24,20 @@ int dx[4] = {-1, 0, 1, 0};
 int dy[4] = {0, -1, 0, 1};
 
 //-----Template---------
-
+int t[1001];
+int N,A,B;
 int main(){
-	ios::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
+    cin>>N>>A>>B;
+    for(int i=0;i<N;i++){
+        cin>>t[i];
+    }
+    int count=0;
+    for (int i = 0; i < N; ++i) {
+        if(!(A<=t[i] && t[i]<B)){
+            count++;
+        }
+    }
+    cout<<count<<endl;
 
 }
