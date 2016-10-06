@@ -26,6 +26,6 @@ int dy[4] = {0, -1, 0, 1};
 //-----Template---------
 
 int main(){
-	ios::sync_with_stdio(false);
+	ios::sync_with_stdio(false); //cout<< fixed << setprecision(10);
 
 }
