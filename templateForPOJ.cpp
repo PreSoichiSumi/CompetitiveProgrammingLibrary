@@ -11,6 +11,8 @@ using namespace std;
 #define MODULE 1000000007
 #define MP make_pair
 #define ALL(v) (v).begin(),(v).end()
+#define fi first
+#define se second
 
 template<class T,class U>inline void chmin(T &t,U f){if(t>f)t=f;}
 template<class T,class U>inline void chmax(T &t,U f){if(t<f)t=f;}
