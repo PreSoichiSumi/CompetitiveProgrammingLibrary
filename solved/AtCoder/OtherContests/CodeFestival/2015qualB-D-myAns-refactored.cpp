@@ -37,7 +37,7 @@ vector<LL> ans;
 int main(){
     ios::sync_with_stdio(false); //cout<< fixed << setprecision(10);
     scanf("%ld",&n);
-    memo.insert(MP(INF/2,INF/2-1000));
+    memo.insert(MP(INF/2,INF/2-1000));  //後でit!=memo.end()として分岐するより番兵を置いといたほうが簡単に書ける
     memo.insert(MP(INF/2-3000,INF/2-5000));
     for (int i = 0; i < n; ++i) {
         scanf("%ld%ld",&tmpS,&tmpC);
@@ -53,24 +53,24 @@ int main(){
                     tmpS=it2->second;
                     pair<LL,LL> p=MP(it2->first,it->second);
                     memo.insert(p);
-                    memo.erase(MP(it->first,it->second)); //イテレータを渡して削除してもいいけど，そのあとイテレータを使わないこと
+                    memo.erase(MP(it->first,it->second));   //イテレータを渡して削除してもいいけど，そのあとイテレータを使わないこと
                     memo.erase(MP(it2->first,it2->second));
                 }else if(it->first+tmpC == it2->second){
                     ans.push_back(it->first+tmpC-1);
 
                     tmpS=it->first+tmpC;
-                    tmpC=0;
                     pair<LL,LL> p=MP(it2->first,it->second);
                     memo.insert(p);
                     memo.erase(MP(it->first,it->second));
                     memo.erase(MP(it2->first,it2->second));
+                    break;
                 }else{
                     ans.push_back(it->first+tmpC-1);
 
                     tmpS=it->first+tmpC;
-                    tmpC=0;
                     memo.insert(MP(tmpS,it->second));
                     memo.erase(MP(it->first,it->second));
+                    break;
                 }
             }else { //あと
                 LL dist=it->second-tmpS;
@@ -87,13 +87,13 @@ int main(){
                     memo.insert(p);
                     memo.erase(MP(it->first,it->second));
                     tmpS=it->second;
-                    tmpC=0;
+                    break;
                 }else{
                     ans.push_back(tmpS+tmpC-1);
 
                     memo.insert(MP(tmpS+tmpC,tmpS));
                     tmpS+=tmpC;
-                    tmpC=0;
+                    break;
                 }
             }
         }
