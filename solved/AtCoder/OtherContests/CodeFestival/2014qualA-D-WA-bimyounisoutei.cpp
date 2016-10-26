@@ -56,20 +56,32 @@ signed main() {
     if (keta == aStr.length()) {    //k内で全て決定できたら
         cout << 0 << endl;
         return 0;
-    } else {//k-1までに決まらなかったら
+    } else {    //k-1までに決まらなかったら
         tmpNum *= 10;
+        /*if(k==1){//k=1のときは0xxxxxもやってみる
+            for (int i = 0; i < 10; ++i) {
+                LL tmpKeta=1;
+                LL tmpNum2=0;
+                while(tmpKeta<aStr.length()){
+                    tmpNum2=tmpNum2*10+i;
+                    tmpKeta++;
+                }
+                chmin(minDist,abs(tmpNum2-a));
+            }
+        }*/
         for (int i = 0; i < 10; ++i) {
             LL tmpKeta = keta;
             LL tmpNum2 = tmpNum + i;
             set<int> tmpHoge = hoge;
-            tmpHoge.insert(i);
+            if(!(tmpKeta==0 && i==0))
+                tmpHoge.insert(i);
             tmpKeta++;
             if (tmpKeta == aStr.length()) {
                 chmin(minDist, abs(tmpNum2 - a));
                 continue;
             }
 
-            for (int j:tmpHoge) {   //残りの桁を今までに使った数字で埋める
+            for (int j:tmpHoge) {   //残りの桁を今までに使った数字のどれかで埋める
                 LL tmpKeta2=tmpKeta;
                 LL tmpNum3=tmpNum2;
                 while (tmpKeta2 < aStr.length()) {
