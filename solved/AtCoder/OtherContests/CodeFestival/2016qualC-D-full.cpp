@@ -32,7 +32,7 @@ int dy[4] = {0, -1, 0, 1};*/
 
 //-----Template---------
 int h, w;
-char color[301][301];
+char color[301][301];   //vector<string>でもいい
 LL dp[301][301];
 LL cost[301][301];
 LL ans[301];
