@@ -89,7 +89,7 @@ int main(){
     for (int i = 0; i <= h; ++i) {
         for (int j = 0; j <= h; ++j) {
             for (int k = 0; k <= h; ++k) {
-                if(i>0){
+                /*if(i>0){
                     chmin(dp[i][j][k], dp[i-1][j][k] + cost1[i-1][j]);
                 }
                 if(j>0){
@@ -97,12 +97,12 @@ int main(){
                 }
                 if(k>0) {
                     chmin(dp[i][j][k], dp[i][j][k - 1] + cost2[j][k - 1]);
-                }
-/*
-                LL tmpA=i-1>0?dp[i-1][j][k] + cost1[i-1][j]:INF;
-                LL tmpB=j-1>0?dp[i][j-1][k] + cost1[i][j-1] + cost2[j-1][k]:INF;
-                LL tmpC=k-1>0?dp[i][j][k-1] + cost2[j][k-1]:INF;
-                dp[i][j][k]=min(dp[i][j][k],min(tmpA,min(tmpB,tmpC)));*/
+                }*/
+
+                LL tmpA=i>0?dp[i-1][j][k] + cost1[i-1][j]:INF; //どっちでも行ける．コンテスト中はi-1>0?と書いていた..
+                LL tmpB=j>0?dp[i][j-1][k] + cost1[i][j-1] + cost2[j-1][k]:INF;
+                LL tmpC=k>0?dp[i][j][k-1] + cost2[j][k-1]:INF;
+                dp[i][j][k]=min(dp[i][j][k],min(tmpA,min(tmpB,tmpC)));
             }
         }
     }
