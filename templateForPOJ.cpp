@@ -20,17 +20,15 @@ template<class T,class U>inline void chmax(T &t,U f){if(t<f)t=f;}
 typedef pair<int, int> P;
 typedef long long LL;
 const int INF = INT_MAX / 2;    //int_max->2*e+9
-const int MAXN = 100001;
+/*const int MAXN = 100001;
 
-/*struct edge {   
+struct edge {   
     edge(int to, int cost) : to(to), cost(cost) {}
     int to, cost;
 };
-vector<edge> graph[MAXN];*/
-
-
+vector<edge> graph[MAXN];
 int dx[4] = {-1, 0, 1, 0};
-int dy[4] = {0, -1, 0, 1};
+int dy[4] = {0, -1, 0, 1};*/
 
 //-----Template---------
 
