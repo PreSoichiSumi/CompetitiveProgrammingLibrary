@@ -15,7 +15,7 @@ template<class T,class U>inline void chmax(T &t,U f){if(t<f)t=f;}
 
 typedef pair<int, int> P;
 typedef long long LL;
-const int INF = LLONG_MAX / 2;    //int_max->2*e+9 LLの時はLLONG_MAX
+const LL INF = LLONG_MAX / 2;    //int_max->2*e+9 LLの時はLLONG_MAX
 const int MAXN = 100001;
 
 /*struct edge {
