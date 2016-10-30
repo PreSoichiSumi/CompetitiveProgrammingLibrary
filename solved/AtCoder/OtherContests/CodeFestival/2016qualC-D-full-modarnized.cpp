@@ -41,7 +41,7 @@ int main() {
         cin >> color[i];
     }
     for (int i = 0; i < w - 1; ++i) {     //2列毎の最小コストを求める
-        vector<vector<LL>> cost(301,vector<LL>(301));
+        vector<vector<LL>> cost(301,vector<LL>(301));	//きれいには書けるが，使い回しに比べて遅い
         for (int j = 0; j <= h; ++j)
             for (int k = 0; k <= h; ++k){
                 if (j == 0 || k == 0) {
