@@ -21,6 +21,10 @@ typedef long long LL;
 const LL INF = LLONG_MAX / 2;    //int_max->2*e+9 LLの時はLLONG_MAX
 const int MAXN = 100001;
 
+template<typename A, size_t N, typename T>
+inline void Fill(A (&array)[N], const T &val){ //usage: int dp[10][10]; Fill(dp,INF);
+    std::fill( (T*)array, (T*)(array+N), val );
+}
 /*struct edge {
     edge(int to, int cost) : to(to), cost(cost) {}
     int to, cost;
@@ -35,7 +39,6 @@ int h, w;
 char color[301][301];   //vector<string>でもいい
 LL dp[301][301];
 LL cost[301][301];
-LL ans[301];
 LL sum = 0;
 string tmpS;
 
@@ -68,11 +71,7 @@ int main() {
                 }
             }
         }
-        for (int j = 0; j <= h; ++j) {
-            for (int k = 0; k <= h; ++k) {
-                dp[j][k] = INF;
-            }
-        }
+        Fill(dp,INF);
         dp[0][0] = 0;
         for (int j = 0; j <= h; ++j) {
             for (int k = 0; k <= h; ++k) {
