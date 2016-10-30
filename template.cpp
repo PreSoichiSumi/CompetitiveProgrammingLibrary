@@ -12,6 +12,10 @@ using namespace std;
 
 template<class T,class U>inline void chmin(T &t,U f){if(t>f)t=f;}
 template<class T,class U>inline void chmax(T &t,U f){if(t<f)t=f;}
+template<typename A, size_t N, typename T>
+inline void Fill(A (&array)[N], const T &val){ //usage: int dp[10][10]; Fill(dp,INF);
+    std::fill( (T*)array, (T*)(array+N), val );
+}
 
 typedef pair<int, int> P;
 typedef long long LL;
