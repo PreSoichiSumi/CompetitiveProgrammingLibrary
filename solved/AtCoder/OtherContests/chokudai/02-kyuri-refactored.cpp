@@ -148,7 +148,9 @@ int main() {
     for (int i = 0; i < 100; ++i) {
         LL pr;
         indexP++;   //同じのにならないようにずらしておく
-
+        while (primes[indexP]<7){
+            indexP++;
+        }
         LL indexK=0;
         while(koudo[indexK]*primes[indexP]>=MAXN) { //こっちはかぶってもいい
             indexK++;
