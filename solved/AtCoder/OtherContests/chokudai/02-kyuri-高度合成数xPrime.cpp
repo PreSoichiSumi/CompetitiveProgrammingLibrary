@@ -50,39 +50,6 @@ vector<LL> getPrimesEratos(LL n){
     }
     return res;
 }
-void printres(map<LL,LL> hoge){
-    cout<<"いきます"<<endl;
-    for (auto it=hoge.begin();it!=hoge.end();it++) {
-        cout<<it->first<<" "<<it->second<<endl;
-    }
-}
-set<LL> bunkai(LL num,vector<LL>& primes){
-    int i=0;
-    set<LL> res;
-    while(primes[i]<sqrt(num)){
-        if(num/primes[i]){
-            res.insert(primes[i]);
-        }
-        i++;
-    }
-    //printres(res);
-    return res;
-}
-/*
-map<LL,LL> bunkai(LL num,vector<LL>& primes){
-    int i=0;
-    map<LL,LL> res;
-    while(primes[i]<sqrt(num)){
-        while(num%primes[i]==0){
-            num/=primes[i];
-            res[primes[i]]++;
-        }
-        i++;
-    }
-    printres(res);
-    return res;
-}*/
-
 
 vector<LL> koudof(){
     vector<LL> res;
@@ -154,72 +121,6 @@ vector<LL> koudof(){
     sort(res.begin(),res.end(),std::greater<LL>());
     return res;
 }
-
-vector<LL> getRes(vector<LL> v){
-    vector<LL> tmp(100,1);
-    bool left=true;
-    bool contFlag=true;
-
-    LL vIt=0;
-    while(contFlag){
-        if(left) {
-            for (int i = 0; i < 100; ++i) {
-                LL prodNum = v[vIt++];
-                if (prodNum * tmp[i]<=MAXN) {
-                    tmp[i] *= prodNum;
-                }else{
-                    contFlag=false;
-                    break;
-                }
-            }
-            for (int i = 99; i >=0 ; --i) {
-                LL prodNum = v[vIt++];
-                if (prodNum * tmp[i]<=MAXN){
-                    tmp[i] *= prodNum;
-                }else{
-                    contFlag=false;
-                    break;
-                }
-            }
-        }else{
-            for (int i = 99; i >=0 ; --i) {
-                LL prodNum = v[vIt++];
-                if (prodNum * tmp[i]<=MAXN) {
-                    tmp[i] *= prodNum;
-                }else{
-                    contFlag=false;
-                    break;
-                }
-            }
-            for (int i = 0; i < 100; ++i) {
-                LL prodNum = v[vIt++];
-                if (prodNum * tmp[i]<=MAXN){
-                    tmp[i] *= prodNum;
-                }else{
-                    contFlag=false;
-                    break;
-                }
-            }
-        }
-
-        left=!left;
-    }
-    return tmp;
-}
-
-//not pure
-LL marge(map<LL,LL>& post,map<LL,LL>& now){
-    LL oldNums=0;
-    for(auto it=now.begin();it!=now.end();it++) {
-        oldNums+=it->second<post[it->first]?0:it->second;
-        if (post[it->first] < it->second) {
-        //    oldNums += it->second - post[it->first];
-            post[it->first] = it->second;
-        }
-    }
-    return oldNums;
-}
-
 
 int main() {
     ios::sync_with_stdio(false); //cout<< fixed << setprecision(10);
