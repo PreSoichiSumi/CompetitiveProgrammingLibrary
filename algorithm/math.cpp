@@ -28,7 +28,7 @@ bool isPrime(int n){
     }
     return n!=1;
 }
-//---エラトステネスのふるい  n以下の素数を列挙---------------
+//---エラトステネスのふるい  n以下の素数を列挙--------------- O(nlog(logn))
 vector<LL> getPrimesEratos(LL n){ 
     LL rootN= static_cast<long>(sqrt(n));
     bool prime[n+1];
@@ -45,6 +45,19 @@ vector<LL> getPrimesEratos(LL n){
         if(prime[i])
             res.push_back(i);
     }
+    return res;
+}
+
+//素因数分解
+map<LL, LL> primeDecomposition(LL num, vector<LL> &primes) {
+    map<LL, LL> res;
+    for (int i = 0; i < primes.size(); ++i) {
+        while (num % primes[i] == 0) {
+            num /= primes[i];
+            res[primes[i]]++;
+        }
+    }
+    printMap(res);
     return res;
 }
 //------繰り返し二乗法
