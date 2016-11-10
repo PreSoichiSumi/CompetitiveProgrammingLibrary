@@ -1,22 +1,17 @@
-ï»¿//--Euclidã®äº’é™¤æ³•--
-int gcd(int a,int b){
-    if(b==0)return a;
-    return gcd(b,a%b);
-}
-//---è©¦ã—å‰²ã‚Šç´ æ•°åˆ¤å®š O(âˆšn)
+//---‚µŠ„‚è‘f””»’è O(ãn)
 bool isPrime(int n){
     for (int i = 2; i*i<=n; ++i) {
         if(n%i==0)return false;
     }
     return n!=1;
 }
-//---ã‚¨ãƒ©ãƒˆã‚¹ãƒ†ãƒã‚¹ã®ãµã‚‹ã„  nä»¥ä¸‹ã®ç´ æ•°ã‚’åˆ—æŒ™--------------- O(nlog(logn))
+//---ƒGƒ‰ƒgƒXƒeƒlƒX‚Ì‚Ó‚é‚¢  nˆÈ‰º‚Ì‘f”‚ğ—ñ‹“--------------- O(nlog(logn))
 vector<LL> getPrimesEratos(LL n){ 
     LL rootN= static_cast<long>(sqrt(n));
     bool prime[n+1];
     fill(prime,prime+n+1,true);
     prime[0]=prime[1]=false;
-    for (LL i = 2; i <= rootN ; i++) {  //âˆšnã‚’è¶…ãˆãªã„ã™ã¹ã¦ã®ç´ æ•°ã§å‰²ã‚Šåˆ‡ã‚Œãªã‘ã‚Œã°nã¯ç´ æ•°
+    for (LL i = 2; i <= rootN ; i++) {  //ãn‚ğ’´‚¦‚È‚¢‚·‚×‚Ä‚Ì‘f”‚ÅŠ„‚èØ‚ê‚È‚¯‚ê‚În‚Í‘f”
         if(prime[i]) {
             for (LL j = i * 2; j <= n; j+=i) prime[j] = false;
         }
@@ -30,7 +25,7 @@ vector<LL> getPrimesEratos(LL n){
     return res;
 }
 
-//ç´ å› æ•°åˆ†è§£
+//‘fˆö”•ª‰ğ
 map<LL, LL> primeDecomposition(LL num, vector<LL> &primes) {
     map<LL, LL> res;
     for (int i = 0; i < primes.size(); ++i) {
@@ -42,14 +37,3 @@ map<LL, LL> primeDecomposition(LL num, vector<LL> &primes) {
     printMap(res);
     return res;
 }
-//------ç¹°ã‚Šè¿”ã—äºŒä¹—æ³•
-LL fastPow(LL x,LL n){ // O(logN)
-    LL res=1;
-    while(n>0){
-        if(n&1)res=res*x;
-        x=x*x;
-        n>>=1;
-    }
-    return res;
-}
-
