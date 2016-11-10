@@ -34,6 +34,5 @@ map<LL, LL> primeDecomposition(LL num, vector<LL> &primes) {
             res[primes[i]]++;
         }
     }
-    printMap(res);
     return res;
 }
