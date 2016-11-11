@@ -21,7 +21,6 @@ inline void Fill(A (&array)[N], const T &val){ //usage: int dp[10][10]; Fill(dp,
 typedef pair<int, int> P;
 typedef long long LL;
 const int INF = INT_MAX / 2;    //int_max->2*e+9 LLの時はLLONG_MAX
-
 //---エラトステネスのふるい  n以下の素数を列挙--------------- O(nlog(logn))
 vector<LL> getPrimesEratos(LL n){
     LL rootN= static_cast<long>(sqrt(n));
@@ -42,6 +41,7 @@ vector<LL> getPrimesEratos(LL n){
 }
 
 //素因数分解
+//<prime,count>
 map<LL, LL> primeDecomposition(LL num, vector<LL> &primes) {
     map<LL, LL> res;
     for (int i = 0; i < primes.size(); ++i) {
@@ -52,10 +52,6 @@ map<LL, LL> primeDecomposition(LL num, vector<LL> &primes) {
     }
     return res;
 }
-
-
-
-
 //メルセンヌ・ツイスタよりも高速な乱数生成
 //C++11以上
 class xor128{
@@ -83,7 +79,6 @@ private:
     }
 };
 
-
 LL getTime(){
     time_t aclock;
     aclock = time(NULL);  //1970年1月1日0時0分0秒（UTC）からの経過秒数
@@ -95,37 +90,76 @@ LL getTime(){
     now     = asctime(newtime);          // 文字列への変換
     */
 }
+int countDivisor(map<LL,LL> decomposed){
+    int counter=1;
+    for(auto it=decomposed.begin(); it!=decomposed.end();it++){
+        counter*=it->second!=0?it->second:1;
+    }
+    return counter;
+}
 
-LL getScore(vector<int> seq){
+vector<LL> getInitialSeq(vector<LL>& primes){
+    priority_queue<pair<int,int>> pqueue;
+    
+    for(LL i=(int)1e9;i>(int)1e9-10000;i--){
+        LL divis=countDivisor(primeDecomposition(i,primes));
+        pqueue.push(MP(divis,i));
+    }
+    vector<LL> res;
+    for (int i = 0; i < 100; ++i) {
+        res.push_back(pqueue.top().second);
+        pqueue.pop();
+    }
+    return res;
+}
 
+LL getScore(vector<map<LL,LL>>& decomposedSeq){
+    map<LL,LL> merged;
+    for (int i = 0; i < decomposedSeq.size(); ++i) {
+        for(auto it=decomposedSeq[i].begin();it!=decomposedSeq[i].end();it++){
+            if(merged.find(it->first)==merged.end()){
+                merged[it->first]=it->second;
+            }else{
+                if(merged[it->first]<it->second){
+                    merged[it->first]=it->second;
+                }
+            }
+        }
+    }
+    LL counter=1;
+    for(auto it=merged.begin();it!=merged.end();it++){
+        if(it->second!=0)
+            counter*=(it->second+1);
+        if(counter==0)
+            return 0;
+    }
+    return counter;
 }
 
 //やきなまし
 //http://shindannin.hatenadiary.com/entry/20121224/1356364040
-vector <int> mirrorSequenceSI(LL sec)
+vector<LL> primes;
+vector <LL> aniling(LL sec)
 {
-    vector<LL> primes=getPrimesEratos(100000);
+    LL iterateCount=0;
+    primes=getPrimesEratos(100000);
     xor128 ran;
 
-    vector <int> currentSeq;
+    vector <LL> currentSeq;
     vector<map<LL,LL>> currentDecomposed;
 
     // 現在の状態の初期化。この部分は問題によっていろいろなので、あまり気にしないでください。
-    const int L = 5;
-    const int MAXN = 100;
-    for (int i = 0; i < MAXN; i++)
-    {
-        currentSeq.push_back(0);
-    }
+    const int MAXN = 100;   //状態に含まれる要素数
+    const int diff=200000000;
+    currentSeq=getInitialSeq(primes);
 
     for (int i = 0; i < MAXN; ++i) {
         currentDecomposed.push_back(primeDecomposition(currentSeq[i],primes));
     }
-
-    vector <int>    bestSeq         = currentSeq;           // ベストの状態
-    vector<map<LL,LL>> bestDecomposed=currentDecomposed;
-    double          bestScore       = getScore(currentSeq); // ベストスコア。getScoreは、状態からスコアを求める関数
-    double          currentScore    = bestScore;            // 現在のスコア
+    cout<<"initialization done"<<endl;
+    vector <LL>    bestSeq         = currentSeq;           // ベストの状態
+    LL          bestScore       = getScore(currentDecomposed); // ベストスコア。getScoreは、状態からスコアを求める関数
+    LL          currentScore    = bestScore;            // 現在のスコア
     {
         const LL saTimeStart    = getTime();            // 焼きなまし開始時刻。getTimeは、時間を返す関数
         const LL saTimeEnd      = saTimeStart+sec;     // 焼きなまし終了時刻。m_startTimeはこのプログラム自体の開始時間
@@ -133,10 +167,18 @@ vector <int> mirrorSequenceSI(LL sec)
 
         while ((saTimeCurrent = getTime()) < saTimeEnd) // 焼きなまし終了時刻までループ
         {
-            vector <int> nextSeq(currentSeq);       // 次の状態
-            nextSeq[ran()%MAXN] = ran()%(L-1);  // 次の状態を求める。ランダムで1要素選んで、変えてみる。
-
-            const double nextScore = getScore(nextSeq);
+            iterateCount++;
+            
+            vector <LL> nextSeq(currentSeq);       // 次の状態
+            vector<map<LL,LL>> nextDecomposed=currentDecomposed;
+            int updateIndex=ran()%MAXN;
+            LL updateNum=nextSeq[updateIndex]+ran()%diff-diff/2;
+            while(updateNum>1000000000){//1e9ならつかえないので変更
+                updateNum=nextSeq[updateIndex]+ran()%diff-diff/2;
+            }
+            nextSeq[updateIndex] = updateNum;  // 次の状態を求める。ランダムで1要素選んで、変えてみる。
+            nextDecomposed[updateIndex]=primeDecomposition(nextSeq[updateIndex],primes);
+            const LL nextScore = getScore(nextDecomposed);
 
             // 最初t=0のときは、スコアが良くなろうが悪くなろうが、常にnextを使用
             // 最後t=Tのときは、スコアが改善したときのみ、nextを使用
@@ -151,14 +193,15 @@ vector <int> mirrorSequenceSI(LL sec)
             {
                 currentScore = nextScore;
                 currentSeq = nextSeq;
-                printf("current Score=%.8f time=%lld\n",currentScore,t);
+                currentDecomposed=nextDecomposed;
+//                printf("current Score=%.8f time=%lld\n",currentScore,t);
             }
 
             // ベストスコアは保存しておく。
             if(currentScore>bestScore)
             {
                 bestScore = currentScore;
-                printf("New best Score=%.8f time=%lld\n",bestScore,t);
+                printf("New best Score=%lld time=%lld\n",bestScore,t);
                 bestSeq = currentSeq;
             }
         }
@@ -170,5 +213,37 @@ vector <int> mirrorSequenceSI(LL sec)
 
 int main(){
     ios::sync_with_stdio(false); //cout<< fixed << setprecision(10);
+    /*cout<<"start aniling.."<<endl;
+    vector<LL> res=aniling(10);
+    vector<map<LL,LL>> resDecomposed;
+    for (int i = 0; i < 100; ++i) {
+        resDecomposed.push_back(primeDecomposition(res[i],primes));
+    }
+    cout<<"best score: "<<getScore(resDecomposed)<<endl;
+    cout<<"the following is the result"<<endl;
+    for (int i = 0; i < 100; ++i) {
+        cout<<res[i]<<endl;
+    }*/
+    primes=getPrimesEratos(10000);
+    vector<LL> data;
+    for (int i = 0; i < 100; ++i) {
+        data.push_back(100);
+    }
+    vector<map<LL,LL>> decom;
+    decom.push_back(primeDecomposition(150,primes));
+    for (int i = 0; i < 99; ++i) {
+        decom.push_back(primeDecomposition(data[i],primes));
+    }
+    map<LL,LL> res=primeDecomposition(150,primes);
+    int counter=1;
+    for (auto it=res.begin();it!=res.end();it++) {
+        cout<<it->first<<" "<<it->second<<endl;
+        counter*=it->second+1;
+    }
+    cout<<"約数の数"<<endl;
+    cout<<counter<<endl;
+
+    cout<<"score"<<endl;
+    cout<<getScore(decom)<<endl;
 
 }
