@@ -1,4 +1,4 @@
-﻿/#include <bits/stdc++.h>
+﻿#include <bits/stdc++.h>
 //#include <boost/functional/hash.hpp>
 //example: unordered_set< pair<int,int>,boost::hash< std::pair<int, int> > > used;
 //priority_queue< pair<int,pair<int,int> >, vector<pair<int,pair<int,int>>>, greater<pair<int,pair<int,int> > > > pqueue;    //cost, vertex(行き先)
