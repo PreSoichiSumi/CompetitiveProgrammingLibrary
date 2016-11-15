@@ -40,11 +40,6 @@ LL w[50];
 LL v[50];
 
 vector<pair<LL, LL>> half1;
-vector<pair<LL, LL>> half2;
-
-void modify1(){
-
-}
 
 int main() {
     ios::sync_with_stdio(false); //cout<< fixed << setprecision(10);
@@ -76,7 +71,6 @@ int main() {
         half1=res;
     }
 
-
     LL res=0;
     for (int i = 0; i < 1 << n - n2; ++i) {
         LL tmpW2=0,tmpV2=0;
@@ -93,4 +87,3 @@ int main() {
     cout << res << endl;
     return 0;
 }
-
