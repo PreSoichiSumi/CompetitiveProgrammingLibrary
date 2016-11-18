@@ -52,20 +52,23 @@ vector<LL> getPrimesEratos(LL n) {
 //素因数分解
 //<prime,count> O(logn)
 map<int, int> primeDecomposition(LL num, vector<LL> &primes) {
+    LL tmp=num;
     map<int, int> res;
     for (int i = 0; i < primes.size(); ++i) {
-        while (num % primes[i] == 0) {
-            num /= primes[i];
+        while (tmp % primes[i] == 0) {
+            tmp /= primes[i];
             res[primes[i]]++;
         }
     }
+    if(tmp>1)
+        res[tmp]++;
     return res;
 }
 
 int countDivisor(map<int, int> decomposed) {
     int counter = 1;
     for (auto it = decomposed.begin(); it != decomposed.end(); it++) {
-        counter *= it->second != 0 ? it->second : 1;
+        counter *= it->second != 0 ? it->second +1 : 1;
     }
     return counter;
 }
@@ -137,7 +140,7 @@ vector<LL> getInitialSeq(vector<LL> &primes) {
     }
      return res;
      */
-    inv_pqueue tmpPq= getNums((int)1e9,(int)1e9-(int)1e8);
+    /*inv_pqueue tmpPq= getNums((int)1e9,(int)1e9-(int)1e8);
     priority_queue<pair<int,int>> tmpPq2;
     while(!tmpPq.empty()){
         tmpPq2.push(tmpPq.top());
@@ -148,9 +151,9 @@ vector<LL> getInitialSeq(vector<LL> &primes) {
         res.push_back(tmpPq2.top().second);
         tmpPq2.pop();
     }
-    return res;
+    return res;*/
 
-    /*vector<future<inv_pqueue>> vec ;
+    vector<future<inv_pqueue>> vec ;
     //for (int i = (int)1000000000; i >=800000000 ; i-=DIFF) {
     for (int i = (int)1000000000; i >=990000000 ; i-=DIFF) {
         //thread t(getNums,i,i-DIFF);
@@ -177,7 +180,7 @@ vector<LL> getInitialSeq(vector<LL> &primes) {
         res[i]=pa.second;
         qres.pop();
     }
-    return res;*/
+    return res;
 }
 
 
