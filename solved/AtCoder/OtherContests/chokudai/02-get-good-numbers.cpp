@@ -108,8 +108,8 @@ inv_pqueue getNums(int from,int to){
     return pqueue;
 }
 
-//#define DIFF 20000000
-#define DIFF 1000000
+#define DIFF 20000000
+//#define DIFF 1000000
 
 //10^9
 vector<LL> getInitialSeq(vector<LL> &primes) {
@@ -154,8 +154,8 @@ vector<LL> getInitialSeq(vector<LL> &primes) {
     return res;*/
 
     vector<future<inv_pqueue>> vec ;
-    //for (int i = (int)1000000000; i >=800000000 ; i-=DIFF) {
-    for (int i = (int)1000000000; i >=990000000 ; i-=DIFF) {
+    for (int i = (int)1000000000; i >=800000000 ; i-=DIFF) {
+    //for (int i = (int)1000000000; i >=990000000 ; i-=DIFF) {
         //thread t(getNums,i,i-DIFF);
         vec.push_back(async(launch::async,getNums,i,i-DIFF));
     }
@@ -165,20 +165,20 @@ vector<LL> getInitialSeq(vector<LL> &primes) {
         resPqtmp.push_back(res);
     }
 
-    priority_queue<pair<int,int>> qres;
+    set<pair<int,int>> tmp;
     for (int i = 0; i < vec.size(); ++i) {
         while(!resPqtmp[i].empty()){
-            qres.push(resPqtmp[i].top());
+            tmp.insert(resPqtmp[i].top());
             resPqtmp[i].pop();
         }
     }
 
-
     vector<LL> res(RESSIZE);
-    for (int i = 0; i < RESSIZE; ++i) {
-        pair<int,int> pa=qres.top();
-        res[i]=pa.second;
-        qres.pop();
+    int counter=0;
+    for(auto it=tmp.rbegin();it!=tmp.rend();it++){
+        res[counter++]=it->second;
+        if(counter>=RESSIZE)
+            break;
     }
     return res;
 }
