@@ -16,9 +16,9 @@ public:
     vector<LL> adjListDijkstra(int start) { //初期化なしで何回も実行できる．O( |N|log|E| )
 
         LL dist[N];
-        fill(dist,dist+N,INF);  //begin(dist)と書けるはずだったんだけどなあ
+        fill(dist,dist+N,INF);
 
-        priority_queue<P, vector<P>, greater<P>> que;   //<型，PQueueに使うコンテナ，比較>．　<型>もある
+        priority_queue<P, vector<P>, greater<P>> que;   //<型，PQueueに使うコンテナ，比較>． <型>もある
 
         dist[start] = 0;
         que.push(P(0, start));

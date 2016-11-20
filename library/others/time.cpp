@@ -1,11 +1,11 @@
 LL getTime(){
     time_t aclock;
-    aclock = time(NULL);  //1970”N1Œ1“ú00•ª0•biUTCj‚©‚ç‚ÌŒo‰ß•b”
-    return aclock; //sec‚Å•Ô‚·
+    aclock = time(NULL);  //1970å¹´1æœˆ1æ—¥0æ™‚0åˆ†0ç§’ï¼ˆUTCï¼‰ã‹ã‚‰ã®çµŒéç§’æ•°
+    return aclock; //secã§è¿”ã™
     /*
     struct tm* newTime;
     char* now;
-    newtime = localtime(&aclock);        // tm\‘¢‘Ì‚Ö‚Ì•ÏŠ·
-    now     = asctime(newtime);          // •¶š—ñ‚Ö‚Ì•ÏŠ·
+    newtime = localtime(&aclock);        // tmæ§‹é€ ä½“ã¸ã®å¤‰æ›
+    now     = asctime(newtime);          // æ–‡å­—åˆ—ã¸ã®å¤‰æ›
     */
 }
