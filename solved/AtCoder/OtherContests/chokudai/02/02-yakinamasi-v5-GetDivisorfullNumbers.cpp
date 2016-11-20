@@ -1,14 +1,4 @@
 #include <bits/stdc++.h>
-//#include <thread>
-//#include <functional>
-//#include <boost/asio.hpp>
-//#include <boost/asio/io_service.hpp>
-//#include <boost/bind.hpp>
-//#include <boost/thread/thread.hpp>
-
-//#include <boost/functional/hash.hpp>
-//example: unordered_set< pair<int,int>,boost::hash< std::pair<int, int> > > used;
-//priority_queue< pair<int,pair<int,int> >, vector<pair<int,pair<int,int>>>, greater<pair<int,pair<int,int> > > > pqueue;    //cost, vertex(行き先)
 using namespace std;
 
 #define MODULE 1000000007
@@ -110,7 +100,6 @@ vector<LL> getInitialSeq(vector<LL> &primes) {
     cout << "creatingInitialSeq..." << endl;
     vector<future<inv_pqueue>> vec;
     for (int i = NUM_MAX; i >= NUM_MIN; i -= DIFF) {
-        //for (int i = (int)1000000000; i >=990000000 ; i-=DIFF) {
         vec.push_back(async(launch::async, getNums, i, i - DIFF));
     }
     vector<inv_pqueue> resPqtmp;
@@ -126,7 +115,6 @@ vector<LL> getInitialSeq(vector<LL> &primes) {
             resPqtmp[i].pop();
         }
     }
-
     vector<LL> res;
     int counter = 0;
     for (auto it = tmp.rbegin(); it != tmp.rend(); it++) {
@@ -152,8 +140,6 @@ int main() {
         ofs << nums[i] << endl;
     }
     {
-        //lock_guard<mutex> guard(iosMtx);
-        //vector<set<int>> divs;
         cout << "geting initial divs.." << endl;
         for (int i = 0; i < nums.size(); ++i) {
             cout << "div " << i << " .." << endl;
@@ -169,7 +155,6 @@ int main() {
                     divMemo.insert(divTmp.begin(), divTmp.end());
                 }
             }
-            //divs.push_back(divMemo);
             for (auto it = divMemo.begin(); it != divMemo.end();) {
                 ofs2 << (*it);
                 it++;
@@ -177,19 +162,6 @@ int main() {
                     ofs2 << " ";
             }
             ofs2 << endl;
-            if (i >= 6400 && i % 20 == 0)
-                cout << "hoge" << endl;
         }
-        /*
-        for (int i = 0; i < divs.size(); ++i) {
-            for (auto it = divs[i].begin(); it != divs[i].end();){
-                ofs2<<(*it);
-                it++;
-                if(it!=divs[i].end())
-                    ofs2<<" ";
-            }
-            ofs2<<endl;
-        }*/
     }
 }
-
