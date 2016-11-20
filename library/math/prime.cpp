@@ -1,17 +1,17 @@
-//---‚µŠ„‚è‘f””»’è O(ãn)
+//---Å½Å½â€šÂµÅ â€â€šÃ¨â€˜fÂâ€â€Â»â€™Ã¨ O(ÂÃ£n)
 bool isPrime(int n){
     for (int i = 2; i*i<=n; ++i) {
         if(n%i==0)return false;
     }
     return n!=1;
 }
-//---ƒGƒ‰ƒgƒXƒeƒlƒX‚Ì‚Ó‚é‚¢  nˆÈ‰º‚Ì‘f”‚ğ—ñ‹“--------------- O(nlog(logn))
+//---Æ’GÆ’â€°Æ’gÆ’XÆ’eÆ’lÆ’Xâ€šÃŒâ€šÃ“â€šÃ©â€šÂ¢  nË†Ãˆâ€°Âºâ€šÃŒâ€˜fÂâ€â€šÃ°â€”Ã±â€¹â€œ--------------- O(nlog(logn))
 vector<LL> getPrimesEratos(LL n){ 
     LL rootN= static_cast<long>(sqrt(n));
     bool prime[n+1];
     fill(prime,prime+n+1,true);
     prime[0]=prime[1]=false;
-    for (LL i = 2; i <= rootN ; i++) {  //ãn‚ğ’´‚¦‚È‚¢‚·‚×‚Ä‚Ì‘f”‚ÅŠ„‚èØ‚ê‚È‚¯‚ê‚În‚Í‘f”
+    for (LL i = 2; i <= rootN ; i++) {  //ÂÃ£nâ€šÃ°â€™Â´â€šÂ¦â€šÃˆâ€šÂ¢â€šÂ·â€šÃ—â€šÃ„â€šÃŒâ€˜fÂâ€â€šÃ…Å â€â€šÃ¨ÂÃ˜â€šÃªâ€šÃˆâ€šÂ¯â€šÃªâ€šÃnâ€šÃâ€˜fÂâ€
         if(prime[i]) {
             for (LL j = i * 2; j <= n; j+=i) prime[j] = false;
         }
@@ -25,14 +25,28 @@ vector<LL> getPrimesEratos(LL n){
     return res;
 }
 
-//‘fˆö”•ª‰ğ
-map<LL, LL> primeDecomposition(LL num, vector<LL> &primes) {
-    map<LL, LL> res;
+//â€˜fË†Ã¶Ââ€â€¢Âªâ€°Ã°
+map<int, int> primeDecomposition(LL num, vector<LL> &primes) {
+    LL tmp = num;
+    map<int, int> res;
+
+    if (num < 2)return res;
+
     for (int i = 0; i < primes.size(); ++i) {
-        while (num % primes[i] == 0) {
-            num /= primes[i];
+        while (tmp % primes[i] == 0) {
+            tmp /= primes[i];
             res[primes[i]]++;
         }
     }
+    if (tmp > 1)
+        res[tmp]++;
     return res;
+}
+
+int countDivisor(map<int, int> decomposed) {
+    int counter = 1;
+    for (auto it = decomposed.begin(); it != decomposed.end(); it++) {
+        counter *= it->second != 0 ? it->second + 1 : 1;
+    }
+    return counter;
 }
