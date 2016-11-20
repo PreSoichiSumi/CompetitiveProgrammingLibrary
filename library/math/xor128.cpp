@@ -1,25 +1,24 @@
 #include <climits>
 #include <random>
-//ƒƒ‹ƒZƒ“ƒkEƒcƒCƒXƒ^‚æ‚è‚à‚‘¬‚È—”¶¬
-//C++11ˆÈã
+//ãƒ¡ãƒ«ã‚»ãƒ³ãƒŒãƒ»ãƒ„ã‚¤ã‚¹ã‚¿ã®2-3å€ã»ã©æ—©ã„ä¹±æ•°ç”Ÿæˆã‚¢ãƒ«ã‚´ãƒªã‚ºãƒ 
+//usage: xor128 xs(seed); num=xs();
+//è©³ç´°ï¼š http://kitayuta.hatenablog.com/entry/2014/11/15/230145
 class xor128{
 public:
-    static constexpr unsigned min(){ return 0u; }   // —”‚ÌÅ¬’l
-    static constexpr unsigned max(){ return UINT_MAX; } // —”‚ÌÅ‘å’l
-    unsigned operator()(){ return random(); }
+    static constexpr unsigned min(){ return 0u; }//æœ€å°å€¤
+    static constexpr unsigned max(){ return UINT_MAX; }//æœ€å¤§å€¤
+    unsigned operator()(){ return random(); }//ãƒ•ã‚¡ãƒ³ã‚¯ã‚¿
     xor128();
-    xor128(unsigned s){ w=s; }  // —^‚¦‚ç‚ê‚½ƒV[ƒh‚Å‰Šú‰»
+    xor128(unsigned s){ w=s; }  //ã‚·ãƒ¼ãƒ‰
 private:
     unsigned x=123456789u,y=362436069u,z=521288629u,w;
     unsigned random();
 };
 xor128::xor128(){
-    // ƒV[ƒh‚ª—^‚¦‚ç‚ê‚È‚¢‚ÍA
-    // ƒVƒXƒeƒ€‚Ìƒn[ƒhƒEƒFƒAƒGƒ“ƒgƒƒs[ƒ\[ƒX‚©‚çƒV[ƒh‚ğ¶¬
-    std::random_device rd; 
+    std::random_device rd; //ãƒãƒ¼ãƒ‰ã‚¦ã‚§ã‚¢ã‚¨ãƒ³ãƒˆãƒ­ãƒ”ãƒ¼ã‚½ãƒ¼ã‚¹ã‹ã‚‰ã‚·ãƒ¼ãƒ‰ç”Ÿæˆ
     w=rd();
 
-    for(int i=0;i<10;i++){  // ”‰ñ‹ó“Ç‚İ(•s—v?)
+    for(int i=0;i<10;i++){//ç©ºèª­ã¿ ä¸è¦ã‹ã‚‚
         random();
     }
 }
