@@ -172,5 +172,8 @@ int main() {
         cout<<res[i]<<endl;
         ofs<<res[i]<<endl;
     }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 }
