@@ -164,4 +164,13 @@ int main() {
             ofs2 << endl;
         }
     }
+<<<<<<< Updated upstream
+=======
+    cout<<"the best score is : "<<score.size()<<endl;
+    cout<<"the following is the result"<<endl;
+    for (int i = 0; i < 100; ++i) {
+        cout<<res[i]<<endl;
+        ofs<<res[i]<<endl;
+    }
+>>>>>>> Stashed changes
 }
