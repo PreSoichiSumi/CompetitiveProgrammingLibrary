@@ -1,9 +1,15 @@
 //試し割りによる素数判定
-bool isPrime(int n) {
-    for (int i = 2; i * i <= n; ++i) {
+bool isPrime(LL n) {
+    if(n==2 || n==1) {
+        return true;
+    }else if(n%2==0){
+        return false;
+    }
+
+    for (int i = 3; i * i <= n; i+=2) {
         if (n % i == 0)return false;
     }
-    return n != 1;
+    return true;
 }
 
 //エラトステネスの篩による素数判定 O( n log( log n ) )
