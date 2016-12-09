@@ -34,7 +34,7 @@ vector<edge> graph[MAXN];
 int dx[4] = {-1, 0, 1, 0};
 int dy[4] = {0, -1, 0, 1};*/
 //-----Template---------
-int edge[20][20];
+int d[20][20];
 int n, m;
 
 //dp[i][j]:iの頂点をすでに通った状態でjにいるとき，0に戻るまでにかかる最小のコスト
@@ -50,7 +50,7 @@ int rec(int s, int v) {
     int res=INF;
     for(int i=0;i<n;i++){
         if(!(s>>i&1))
-            chmin(res,rec(s|1<<i,i)+edge[v][i]);
+            chmin(res,rec(s|1<<i,i)+d[v][i]);
     }
     return dp[s][v]=res;
 }
@@ -58,11 +58,12 @@ int rec(int s, int v) {
 int main() {
     ios::sync_with_stdio(false); //cout<< fixed << setprecision(10);
     cin >> n >> m;
+    Fill(d,INF);
     for (int i = 0; i < m; i++) {
         int from, to, cost;
         cin >> from >> to >> cost;
         //from--; to--;
-        edge[from][to] = cost;
+        d[from][to] = cost;
     }
     memset(dp, -1, sizeof(dp));
     cout << rec(0, 0) << endl;
