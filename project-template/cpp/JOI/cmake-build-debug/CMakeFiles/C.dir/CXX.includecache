@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/c/Users/s-sumi/ClionProjects/Atcoder-new/SolveC.cpp
+climits
+-
+utility
+-
+vector
+-
+cstdio
+-
+iostream
+-
+

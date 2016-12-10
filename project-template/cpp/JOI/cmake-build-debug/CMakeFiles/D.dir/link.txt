@@ -1,0 +1,1 @@
+/usr/bin/c++.exe   -std=gnu++11 -g  -Wl,--enable-auto-import CMakeFiles/D.dir/SolveD.cpp.o  -o D.exe -Wl,--out-implib,libD.dll.a -Wl,--major-image-version,0,--minor-image-version,0 

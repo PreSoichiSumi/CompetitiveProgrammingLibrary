@@ -1,0 +1,1 @@
+/usr/bin/c++.exe   -std=gnu++11 -g  -Wl,--enable-auto-import CMakeFiles/E.dir/SolveE.cpp.o  -o E.exe -Wl,--out-implib,libE.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
