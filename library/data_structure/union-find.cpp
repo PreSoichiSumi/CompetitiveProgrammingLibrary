@@ -19,8 +19,8 @@ struct UnionFind {
         return root(x) == root(y);
     }
 
-    int root(int x) {
-        return data[x] < 0 ? x : data[x] = root(data[x]);
+    int find(int x) {
+        return data[x] < 0 ? x : data[x] = find(data[x]);
     }
 
     int size(int x) {
