@@ -9,6 +9,8 @@ using namespace std;
 #define ALL(v) (v).begin(),(v).end()
 #define fi first
 #define se second
+#define CONTAINS(x, y) (x.find(y)!=x.end()) //x<T1,T2>, T1 y 
+#define getPair(x) MP(x->first,x->second) 
 
 template<class T,class U>inline void chmin(T &t,U f){if(t>f)t=f;}
 template<class T,class U>inline void chmax(T &t,U f){if(t<f)t=f;}
@@ -34,5 +36,7 @@ int dy[4] = {0, -1, 0, 1};*/
 
 int main(){
 	ios::sync_with_stdio(false); //cout<< fixed << setprecision(10);
+								 //cout<<setw(4)<<setfill('0')<<"hoge"<<endl; 
+
 
 }
