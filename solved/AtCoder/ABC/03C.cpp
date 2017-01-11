@@ -9,6 +9,8 @@ using namespace std;
 #define ALL(v) (v).begin(),(v).end()
 #define fi first
 #define se second
+#define CONTAINS(x, y) (x.find(y)!=x.end()) //x<T1,T2>, T1 y
+#define getPair(x) MP(x->first,x->second)
 
 template<class T,class U>inline void chmin(T &t,U f){if(t>f)t=f;}
 template<class T,class U>inline void chmax(T &t,U f){if(t<f)t=f;}
@@ -31,9 +33,22 @@ int dx[4] = {-1, 0, 1, 0};
 int dy[4] = {0, -1, 0, 1};*/
 
 //-----Template---------
-double xa,ya,xb,yb,xc,yc;
+int n,k;
+int r[111];
 int main(){
     ios::sync_with_stdio(false); cout<< fixed << setprecision(10);
-    cin>>xa>>ya>>xb>>yb>>xc>>yc;
-    cout<<abs(xa*(yb-yc)+xb*(yc-ya)+xc*(ya-yb))/2<<endl; //ヘロンを変形　http://blog.livedoor.jp/portal8/archives/1619626.html
+    //cout<<setw(4)<<setfill('0')<<"hoge"<<endl;
+    cin>>n>>k;
+    for (int i = 0; i < n; ++i) {
+        cin>>r[i];
+    }
+    sort(r,r+n);
+    double rate=0;
+    for (int i = 0; i < k; ++i) {
+        int index=n-k+i;
+        if(rate<r[index])
+            rate=(rate+r[index])/2;
+    }
+    cout<<rate<<endl;
+
 }
