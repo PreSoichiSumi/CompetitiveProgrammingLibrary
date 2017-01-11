@@ -90,7 +90,8 @@ int main() {
                 E = (i / 12) * 100;
                 E += (i % 12) * 5;
                 in = false;
-                cout << setw(4) << setfill('0') << S << "-" << E << endl;
+                cout << setw(4) << setfill('0') << S << "-";
+				cout << setw(4) << setfill('0') << E << endl;
             }
         } else {
             if (counter > 0) {
