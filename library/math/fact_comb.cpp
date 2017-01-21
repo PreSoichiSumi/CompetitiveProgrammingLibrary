@@ -10,6 +10,7 @@ uint64_t basicComb(uint64_t n, uint64_t k) {
     return basicFact(n) / (basicFact(k) * basicFact(n-k));
 }
 //---結果がuint64内ならオーバーフローしない組み合わせ計算----------------
+//5C2は5*4/1*2となることから
 uint64_t goodComb(uint64_t n, uint64_t k) { 
     uint64_t r = 1;
     for (uint64_t d = 1; d <= k; ++d) {
@@ -20,6 +21,7 @@ uint64_t goodComb(uint64_t n, uint64_t k) {
 }
 //素因数分解を使った組み合わせ計算.mod下でも動作する
 //http://qiita.com/HirotoKagotani/items/a0ab4436116adc94ca46
+
 LL modComb(LL n, LL k, LL mod) {
 
     vector<LL> primes=getPrimesEratos(n);
