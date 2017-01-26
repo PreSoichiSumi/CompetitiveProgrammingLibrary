@@ -140,3 +140,39 @@ int kruskal(){
     return res;
 }
 //---------------------
+
+
+//-----bfs
+char maze[51][51];
+int r, c;
+int sx, sy;
+int gx, gy;
+
+int d[51][51];
+
+int bfs() {
+    queue<P> que;
+    for (int i = 0; i < r; ++i) {
+        for (int j = 0; j < c; ++j) {
+            d[i][j] = INF;
+        }
+    }
+    que.push(P(sy, sx));
+    d[sy][sx] = 0;
+    while (que.size()) {
+        P &p = que.front();
+        que.pop();
+        if (p.first == gy && p.second == gx)break;
+
+        for (int i = 0; i < 4; ++i) {
+            int ny = p.first + dx[i], nx = p.second + dy[i];
+            if (0 <= ny && ny < r && 0 <= nx && nx < c
+                && maze[ny][nx] != '#' && d[ny][nx] == INF){
+                que.push(P(ny,nx));
+                d[ny][nx]=d[p.first][p.second]+1;
+            }
+        }
+    }
+    return d[gy][gx];
+}
+//-------------
