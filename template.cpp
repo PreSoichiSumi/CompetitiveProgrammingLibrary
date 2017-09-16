@@ -35,6 +35,7 @@ int dy[4] = {0, -1, 0, 1};*/
 //-----Template---------
 
 int main(){
+    cin.tie(0);
 	ios::sync_with_stdio(false); //cout<< fixed << setprecision(10);
 								 //cout<<setw(4)<<setfill('0')<<"hoge"<<endl; 
 
