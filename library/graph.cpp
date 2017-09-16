@@ -114,8 +114,9 @@ int prim(){
         for (int u = 0; u < V; ++u) {
             mincost[u]=min(mincost[u],cost[v][u]);
         }
-        return res;
+        
     }
+    return res;
 }
 //------
 
